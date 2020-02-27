@@ -1,6 +1,7 @@
 <template>
   <div class="about">
     <Top msg="ADD A NEW BANK CARD"/>
+    <Card />
     <CardForm />
     <router-link to="/" class="button">Add card</router-link>
   </div>
@@ -8,11 +9,13 @@
 
 <script>
 import Top from '@/components/Top.vue'
+import Card from '@/components/Card.vue'
 import CardForm from '@/components/CardForm.vue'
 export default {
   name: 'AddCard',
   components: {
     Top,
+    Card,
     CardForm
   }
 }

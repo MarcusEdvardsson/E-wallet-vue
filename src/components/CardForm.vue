@@ -6,7 +6,7 @@
     </div>
         <div class="name-container flex">
         <label for="name">Cardholder Name</label>
-        <input id="name" maxlength="20" type="text">
+        <input id="name" maxlength="20" type="text" v-model="cardholder">
     </div>
     <div class="half">
         <div class="valid-container flex">
@@ -31,6 +31,11 @@
 <script>
 export default {
   name: 'CardForm',
+  methods: {
+    sendNameToCard () {
+      console.log('hej')
+    }
+  },
   data () {
     return {
       vendor: '',
@@ -39,7 +44,8 @@ export default {
         'Ninja Bank',
         'Block Chain INC',
         'Evil Corp'
-      ]
+      ],
+      cardholder: ''
     }
   }
 }
