@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <img src="../assets/chip-dark.svg">
-    <p>{{ cardholder }}</p>
+    <p>{{ data }}</p>
   </div>
 </template>
 
@@ -9,6 +9,11 @@
 export default {
   name: 'Card',
   components: {
+  },
+  created () {
+    this.$eventBus.$on('send-data', (data) => {
+      // do something with the data
+    });
   }
 }
 </script>

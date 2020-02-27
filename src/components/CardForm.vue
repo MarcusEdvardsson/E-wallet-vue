@@ -32,8 +32,8 @@
 export default {
   name: 'CardForm',
   methods: {
-    sendNameToCard () {
-      console.log('hej')
+    sendData () {
+      this.$eventBus.$emit('send-data', data)
     }
   },
   data () {
@@ -47,6 +47,8 @@ export default {
       ],
       cardholder: ''
     }
+  },
+  props: {
   }
 }
 </script>
