@@ -2,20 +2,20 @@
   <div class="cardform">
     <div class="card-container flex">
         <label for="cardnumber">Card Number</label>
-        <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric">
+        <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric" v-model="addCard">
     </div>
         <div class="name-container flex">
         <label for="name">Cardholder Name</label>
-        <input id="name" maxlength="20" type="text" v-model="cardholder">
+        <input id="name" maxlength="20" type="text" v-model="addCard">
     </div>
     <div class="half">
         <div class="valid-container flex">
             <label for="expirationdate">Valid thru</label>
-            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
+            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric" v-model="addCard">
         </div>
         <div class="ccv-container flex">
             <label for="securitycode">CCV</label>
-            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
+            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" v-model="cards" min="1" max="3">
         </div>
     </div>
     <div class="vendor-container flex">
@@ -31,9 +31,9 @@
 <script>
 export default {
   name: 'CardForm',
+  props: 'cards',
   methods: {
-    sendData () {
-      this.$eventBus.$emit('send-data', data)
+    addCard () {
     }
   },
   data () {
@@ -44,11 +44,8 @@ export default {
         'Ninja Bank',
         'Block Chain INC',
         'Evil Corp'
-      ],
-      cardholder: ''
+      ]
     }
-  },
-  props: {
   }
 }
 </script>

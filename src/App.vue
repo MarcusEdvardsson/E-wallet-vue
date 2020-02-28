@@ -1,8 +1,32 @@
 <template>
   <div id="app">
-    <router-view/>
+    <router-view :cards=cards />
   </div>
 </template>
+
+<script>
+export default {
+  name: 'app',
+  data () {
+    return {
+      cards: [
+        {
+          cardname: 'Marcus Edvardsson',
+          cardnumber: '1234 5678 91011',
+          cardvendor: 'Bitcoin INC',
+          cardid: 1
+        },
+        {
+          cardname: 'Stefan Isgren',
+          cardnumber: '1234 5678 91012',
+          cardvendor: 'Ninja Bank',
+          cardid: 2
+        }
+      ]
+    }
+  }
+}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=PT+Mono|Source+Sans+Pro&display=swap');
@@ -11,6 +35,12 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 .button {
