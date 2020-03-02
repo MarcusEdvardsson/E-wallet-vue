@@ -22,5 +22,9 @@ export default {
 </script>
 
 <style scoped>
-
+.home {
+  height: 100vh;
+  max-width: 100%;
+  padding: 0rem 20%;
+}
 </style>

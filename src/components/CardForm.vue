@@ -2,25 +2,56 @@
   <div class="cardform">
     <div class="card-container flex">
         <label for="cardnumber">Card Number</label>
-        <input id="cardnumber" type="text" pattern="[0-9]*" inputmode="numeric" v-model="addCard">
+        <input id="cardnumber"
+        placeholder="XXXX XXXX XXXX XXXX"
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
+        type="text"
+        pattern="[0-9]*"
+        inputmode="numeric"
+        v-model.number="card.cardNumber">
     </div>
         <div class="name-container flex">
         <label for="name">Cardholder Name</label>
-        <input id="name" maxlength="20" type="text" v-model="addCard">
+        <input id="name"
+        maxlength="20"
+        placeholder="Cardholder Name"
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Cardholder Name'"
+        type="text"
+        v-model="card.cardName">
     </div>
     <div class="half">
         <div class="valid-container flex">
             <label for="expirationdate">Valid thru</label>
-            <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric" v-model="addCard">
+            <input id="expirationdate"
+            placeholder="02/12"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = '02/12'"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            v-model.number="card.exp">
         </div>
         <div class="ccv-container flex">
             <label for="securitycode">CCV</label>
-            <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric" v-model="cards" min="1" max="3">
+            <input id="securitycode"
+            maxlength="3"
+            placeholder="XXX"
+            onfocus="this.placeholder = ''"
+            onblur="this.placeholder = 'XXX'"
+            type="text"
+            pattern="[0-9]*"
+            inputmode="numeric"
+            v-model.number="card.ccv">
         </div>
     </div>
     <div class="vendor-container flex">
         <label for="vendor">Vendor</label>
-        <input id="vendor" type="text" v-model="vendor" list="vendors">
+        <input id="vendor"
+        type="text"
+        v-model="vendor"
+        list="vendors">
         <datalist id="vendors">
             <option v-bind:key="vendor.title" v-for="vendor in vendors">{{ vendor }}</option>
         </datalist>
@@ -31,13 +62,17 @@
 <script>
 export default {
   name: 'CardForm',
-  props: 'cards',
+  props: [],
   methods: {
-    addCard () {
-    }
   },
   data () {
     return {
+      card: {
+        cardName: '',
+        cardNumber: '',
+        exp: '',
+        ccv: ''
+      },
       vendor: '',
       vendors: [
         'Bitcoin INC',
@@ -71,6 +106,7 @@ export default {
 
 .ccv-container {
     width: 50%;
+    margin-left: 5px;
 }
 
 .valid-container {
@@ -87,4 +123,25 @@ export default {
     display: flex;
     flex-direction: row;
 }
+
+.bitcoin {
+  background: linear-gradient(237.41deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 99.07%), #FFAE34;
+}
+
+.ninja {
+  background: linear-gradient(237.75deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%), #222222;
+}
+
+.blockchain {
+  background: linear-gradient(238.04deg, rgba(0, 0, 0, 0.15) 1.49%, rgba(0, 0, 0, 0) 100%), #8B58F9;
+}
+
+.evilcorp {
+  background: linear-gradient(237.75deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 100%), #F33355;
+}
+
+input::placeholder {
+  font-variant: small-caps;
+}
+
 </style>

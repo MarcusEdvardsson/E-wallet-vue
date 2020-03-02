@@ -1,16 +1,24 @@
 <template>
   <div class="card">
     <img src="../assets/chip-dark.svg">
-    <div v-bind:key='card.cardid' v-for='card in cards'>
-      <p>{{ card.cardname }}</p>
-    </div>
+    <img src="../assets/vendor-bitcoin.svg">
+    <p>{{ card.cardName }}</p>
+    <p>1234 5678 9101</p>
+    <p>02/12</p>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Card',
-  props: ['cards']
+  props: ['cardName'],
+  data () {
+    return {
+      card: {
+        cardName: ''
+      }
+    }
+  }
 }
 </script>
 

@@ -12,13 +12,13 @@ export default {
       cards: [
         {
           cardname: 'Marcus Edvardsson',
-          cardnumber: '1234 5678 91011',
+          cardnumber: '1234 5678 9101',
           cardvendor: 'Bitcoin INC',
           cardid: 1
         },
         {
           cardname: 'Stefan Isgren',
-          cardnumber: '1234 5678 91012',
+          cardnumber: '1234 5678 9101',
           cardvendor: 'Ninja Bank',
           cardid: 2
         }

@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <Top msg="ADD A NEW BANK CARD"/>
-    <Card :cards=cards />
+    <Card />
     <CardForm />
     <router-link to="/" class="button">Add card</router-link>
   </div>
@@ -13,7 +13,7 @@ import Card from '@/components/Card.vue'
 import CardForm from '@/components/CardForm.vue'
 export default {
   name: 'AddCard',
-  props: ['cards'],
+  props: ['cardName'],
   components: {
     Top,
     Card,
@@ -23,6 +23,11 @@ export default {
 </script>
 
 <style scoped>
+.about {
+  height: 100vh;
+  max-width: 100%;
+  padding: 0rem 20%;
+}
 .button {
   padding: 1rem 7rem;
   background: black;
