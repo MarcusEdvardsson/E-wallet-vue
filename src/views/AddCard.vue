@@ -1,8 +1,8 @@
 <template>
   <div class="about">
     <Top msg="ADD A NEW BANK CARD"/>
-    <Card />
-    <CardForm />
+    <Card :card="card" />
+    <CardForm :input="card" />
     <router-link to="/" class="button">Add card</router-link>
   </div>
 </template>
@@ -13,11 +13,22 @@ import Card from '@/components/Card.vue'
 import CardForm from '@/components/CardForm.vue'
 export default {
   name: 'AddCard',
-  props: ['cardName'],
+  props: {},
   components: {
     Top,
     Card,
     CardForm
+  },
+  data: () => {
+    return {
+      card: {
+        cardNumber: '',
+        cardHolder: null,
+        valYear: '',
+        ccv: null,
+        vendor: { color: '', name: '', logo: '' }
+      }
+    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="card">
-    <img src="../assets/chip-dark.svg">
-    <img src="../assets/vendor-bitcoin.svg">
+    <img src="../assets/img/chip-dark.svg">
+    <img class="card-logo" :src="card.vendor.logo">
     <p>{{ card.cardName }}</p>
     <p>1234 5678 9101</p>
     <p>02/12</p>
@@ -11,13 +11,10 @@
 <script>
 export default {
   name: 'Card',
-  props: ['cardName'],
-  data () {
-    return {
-      card: {
-        cardName: ''
-      }
-    }
+  props: {
+    card: Object
+  },
+  computed: {
   }
 }
 </script>

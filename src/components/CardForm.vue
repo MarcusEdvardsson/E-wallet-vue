@@ -1,15 +1,17 @@
 <template>
-  <div class="cardform">
+  <form class="cardform">
     <div class="card-container flex">
         <label for="cardnumber">Card Number</label>
-        <input id="cardnumber"
+        <input
+        id="cardnumber"
         placeholder="XXXX XXXX XXXX XXXX"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
         type="text"
-        pattern="[0-9]*"
-        inputmode="numeric"
-        v-model.number="card.cardNumber">
+        pattern="[0-9]{16,16}"
+        maxlength="16"
+        v-model.number="input.cardNumber"
+        @input="setValue('cardNumber', $event.target.value)">
     </div>
         <div class="name-container flex">
         <label for="name">Cardholder Name</label>
@@ -19,7 +21,8 @@
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'Cardholder Name'"
         type="text"
-        v-model="card.cardName">
+        v-model.trim="input.cardName"
+        @input="setValue('cardHolder', $event.target.value)">
     </div>
     <div class="half">
         <div class="valid-container flex">
@@ -43,43 +46,52 @@
             type="text"
             pattern="[0-9]*"
             inputmode="numeric"
-            v-model.number="card.ccv">
+            v-model.number="input.ccv"
+            @input="setValue('ccv', $event.target.value)">
         </div>
     </div>
-    <div class="vendor-container flex">
+    <!-- <div class="vendor-container flex">
         <label for="vendor">Vendor</label>
         <input id="vendor"
         type="text"
-        v-model="vendor"
+        v-model="card.vendor"
         list="vendors">
         <datalist id="vendors">
             <option v-bind:key="vendor.title" v-for="vendor in vendors">{{ vendor }}</option>
         </datalist>
-</div>
-  </div>
+    </div> -->
+        <label class="form-label">Vendor</label>
+        <vSelect
+          class=" form-input--std"
+          type="text"
+          v-model="input.vendor"
+          :options="vendors"
+          label="name"
+          @input="setValue('vendor', $event.target)">
+          </vSelect>
+  </form>
 </template>
 
 <script>
+import vSelect from 'vue-select'
+import { vendors } from '@/assets/vendors.json'
 export default {
   name: 'CardForm',
-  props: [],
-  methods: {
+  components: {
+    vSelect
   },
-  data () {
+  props: {
+    input: Object
+  },
+  methods: {
+    setValue (field, value) {
+      this.input[field] = value
+      this.$v.input[field].$touch()
+    }
+  },
+  data: () => {
     return {
-      card: {
-        cardName: '',
-        cardNumber: '',
-        exp: '',
-        ccv: ''
-      },
-      vendor: '',
-      vendors: [
-        'Bitcoin INC',
-        'Ninja Bank',
-        'Block Chain INC',
-        'Evil Corp'
-      ]
+      vendors: vendors
     }
   }
 }

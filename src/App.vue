@@ -1,30 +1,12 @@
 <template>
   <div id="app">
-    <router-view :cards=cards />
+    <router-view />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app',
-  data () {
-    return {
-      cards: [
-        {
-          cardname: 'Marcus Edvardsson',
-          cardnumber: '1234 5678 9101',
-          cardvendor: 'Bitcoin INC',
-          cardid: 1
-        },
-        {
-          cardname: 'Stefan Isgren',
-          cardnumber: '1234 5678 9101',
-          cardvendor: 'Ninja Bank',
-          cardid: 2
-        }
-      ]
-    }
-  }
+  name: 'app'
 }
 </script>
 
