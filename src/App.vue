@@ -1,44 +1,52 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view class="container" />
   </div>
 </template>
 
-<script>
-export default {
-  name: 'app'
-}
-</script>
-
 <style>
 @import url('https://fonts.googleapis.com/css?family=PT+Mono|Source+Sans+Pro&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-variant: small-caps;
+}
+
 #app {
   font-family: 'PT Mono';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
+  height: 110vh;
+  display: flex;
+  justify-content: center;
+  background: white;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+.container {
+  width: 26rem;
+  height: 56rem;
+  min-height: min-content;
+  background: white;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button {
-  padding: 1rem 5rem;
-  border: 1px solid black;
-  text-transform: uppercase;
-  text-decoration: none;
-  border-radius: 8px;
-  box-sizing: border-box;
-  font-weight: bold;
-  font-size: 22px;
-  line-height: 25px;
+  width: 24rem;
+  height: 5rem;
+  border: 1px solid #000000;
+  background: white;
+  border-radius: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 900;
+  position: absolute;
+  bottom: 3rem;
 }
-
-.button:visited {
-  text-decoration: none;
-  color: black;
+.remove {
+  bottom: 8.5rem;
 }
 </style>

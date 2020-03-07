@@ -1,19 +1,20 @@
 <template>
-  <div class="about">
-    <Top msg="ADD A NEW BANK CARD"/>
-    <Card :card="card" />
-    <CardForm :input="card" />
-    <router-link to="/" class="button">Add card</router-link>
-  </div>
+  <section>
+    <Top header="ADD A NEW BANK CARD" />
+    <Card :input="input" />
+    <CardForm @cardInfo="cardInfo" />
+    <button
+    class="button"
+    @click="addCard">ADD CARD</button>
+  </section>
 </template>
 
 <script>
-import Top from '@/components/Top.vue'
-import Card from '@/components/Card.vue'
-import CardForm from '@/components/CardForm.vue'
+import Top from '../components/Top'
+import Card from '../components/Card'
+import CardForm from '../components/CardForm'
 export default {
   name: 'AddCard',
-  props: {},
   components: {
     Top,
     Card,
@@ -21,27 +22,25 @@ export default {
   },
   data: () => {
     return {
-      card: {
-        cardNumber: '',
-        cardHolder: null,
-        valYear: '',
-        ccv: null,
-        vendor: { color: '', name: '', logo: '' }
+      input: {},
+      myCards: []
+    }
+  },
+  methods: {
+    addCard () {
+      if (localStorage.getItem('cards')) {
+        this.myCards = JSON.parse(localStorage.getItem('cards'))
+        this.myCards.push(this.input)
+        localStorage.setItem('cards', JSON.stringify(this.allCards))
+      } else {
+        this.myCards.push(this.input)
+        localStorage.setItem('cards', JSON.stringify(this.allCards))
       }
+      this.$router.push('/')
+    },
+    cardInfo (input) {
+      this.input = input
     }
   }
 }
 </script>
-
-<style scoped>
-.about {
-  height: 100vh;
-  max-width: 100%;
-  padding: 0rem 20%;
-}
-.button {
-  padding: 1rem 7rem;
-  background: black;
-  color: white;
-}
-</style>

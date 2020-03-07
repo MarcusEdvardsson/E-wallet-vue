@@ -1,159 +1,153 @@
 <template>
-  <form class="cardform">
-    <div class="card-container flex">
-        <label for="cardnumber">Card Number</label>
+  <form @input="cardInfo" class="cardform">
+    <div>
+        <label for="cardNumber">Card Number</label>
         <input
-        id="cardnumber"
-        placeholder="XXXX XXXX XXXX XXXX"
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
-        type="text"
-        pattern="[0-9]{16,16}"
-        maxlength="16"
-        v-model.number="input.cardNumber"
-        @input="setValue('cardNumber', $event.target.value)">
-    </div>
-        <div class="name-container flex">
-        <label for="name">Cardholder Name</label>
-        <input id="name"
-        maxlength="20"
-        placeholder="Cardholder Name"
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Cardholder Name'"
-        type="text"
-        v-model.trim="input.cardName"
-        @input="setValue('cardHolder', $event.target.value)">
-    </div>
-    <div class="half">
-        <div class="valid-container flex">
-            <label for="expirationdate">Valid thru</label>
-            <input id="expirationdate"
-            placeholder="02/12"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = '02/12'"
             type="text"
-            pattern="[0-9]*"
-            inputmode="numeric"
-            v-model.number="card.exp">
-        </div>
-        <div class="ccv-container flex">
-            <label for="securitycode">CCV</label>
-            <input id="securitycode"
-            maxlength="3"
-            placeholder="XXX"
+            id="cardNumber"
+            placeholder="XXXX XXXX XXXX XXXX"
             onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'XXX'"
-            type="text"
-            pattern="[0-9]*"
-            inputmode="numeric"
-            v-model.number="input.ccv"
-            @input="setValue('ccv', $event.target.value)">
-        </div>
+            onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
+            v-model="input.nrInput"
+            maxlength="16"
+            @input="validateNumber"/>
     </div>
-    <!-- <div class="vendor-container flex">
-        <label for="vendor">Vendor</label>
-        <input id="vendor"
-        type="text"
-        v-model="card.vendor"
-        list="vendors">
-        <datalist id="vendors">
-            <option v-bind:key="vendor.title" v-for="vendor in vendors">{{ vendor }}</option>
-        </datalist>
-    </div> -->
-        <label class="form-label">Vendor</label>
-        <vSelect
-          class=" form-input--std"
+    <label for="cardName">Cardholder Name</label>
+    <input
+      type="text"
+      id="cardName"
+      placeholder="Cardholder Name"
+      onfocus="this.placeholder = ''"
+      onblur="this.placeholder = 'Cardholder Name'"
+      v-model="input.nameInput"
+      maxlength="22"
+      @input="validateName"/>
+
+    <section class="sides">
+      <div>
+        <label for="validInput">Valid</label>
+        <input
           type="text"
-          v-model="input.vendor"
-          :options="vendors"
-          label="name"
-          @input="setValue('vendor', $event.target)">
-          </vSelect>
+          id="validInput"
+          placeholder="XX/XX"
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'XX/XX'"
+          v-model="input.validInput"
+          maxlength="5"
+          @input="validateValid"/>
+      </div>
+
+      <div>
+        <label for="cvcInput">CvC</label>
+        <input
+          type="text"
+          id="cvcInput"
+          placeholder="XXX"
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'XXX'"
+          v-model="input.cvcInput"
+          maxlength="3"
+          @input="validateCvc"/>
+      </div>
+
+    </section>
+        <label for="vendor">VENDOR</label>
+        <select name id="vendor" v-model="input.vendorInput" @input="validateVendor">
+            <option value="bitcoin">Bitcoin Inc</option>
+            <option value="ninja">Ninja Bank</option>
+            <option value="blockchain">Block Chain Inc</option>
+            <option value="evil">Evil Corp</option>
+        </select>
   </form>
 </template>
 
 <script>
-import vSelect from 'vue-select'
-import { vendors } from '@/assets/vendors.json'
 export default {
-  name: 'CardForm',
-  components: {
-    vSelect
-  },
-  props: {
-    input: Object
-  },
-  methods: {
-    setValue (field, value) {
-      this.input[field] = value
-      this.$v.input[field].$touch()
-    }
-  },
   data: () => {
     return {
-      vendors: vendors
+      input: {
+        nrInput: '',
+        nameInput: '',
+        validInput: '',
+        cvcInput: '',
+        vendorInput: '',
+        isValid: false
+      },
+      cardInput: {
+        validNumber: false,
+        validName: false,
+        validValid: false,
+        validCvc: false,
+        validVendor: true
+      }
+    }
+  },
+  methods: {
+    cardInfo () {
+      const isTrue = Object.keys(this.cardInput).every(
+        key => this.cardInput[key] === false
+      )
+      if (isTrue === true) {
+        const isEmpty = Object.keys(this.input).some(key => this.input[key] === '')
+        if (isEmpty === false) {
+          this.input.isValid = true
+        }
+      }
+      this.$emit('cardInfo', this.input)
+    },
+    validateNumber () {
+      if (
+        this.checkNumber(this.input.nrInput) === true ||
+        this.input.nrInput === ''
+      ) {
+        this.cardInput.validNumber = false
+      } else {
+        this.cardInput.validNumber = true
+      }
+    },
+    validateName () {
+      if (this.checkName(this.input.nameInput) === true) {
+        this.cardInput.validName = false
+      } else {
+        this.cardInput.validName = true
+      }
+    },
+    validateValid () {
+      if (this.checkValid(this.input.validInput) === true) {
+        this.cardInput.validValid = false
+      } else {
+        this.cardInput.validValid = true
+      }
+    },
+    validateCvc () {
+      if (this.checkCvc(this.input.cvcInput) === true) {
+        this.cardInput.validCvc = false
+      } else {
+        this.cardInput.validCvc = true
+      }
+    },
+    validateVendor () {
+      this.cardInput.validVendor = false
+    },
+    checkNumber (nrInput) {
+      const pattern = /^[0-9]{16}/
+      return pattern.test(nrInput)
+    },
+    checkName (nameInput) {
+      const pattern = /^[a-zA-Z]+ [a-zA-Z]+$/
+      return pattern.test(nameInput)
+    },
+    checkValid (validInput) {
+      const pattern = /^(0[1-9]|1[012])\/\d{2}$/
+      return pattern.test(validInput)
+    },
+    checkCvc (cvcInput) {
+      const pattern = /^[0-9]{3}/
+      return pattern.test(cvcInput)
     }
   }
 }
 </script>
 
 <style scoped>
-.cardform {
-    min-height: 350px;
-}
-
-.flex {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
-
-.flex label {
-    display: flex;
-    justify-content: flex-start;
-    font-family: 'PT Mono';
-    font-size: 12px;
-    text-transform: uppercase;
-}
-
-.ccv-container {
-    width: 50%;
-    margin-left: 5px;
-}
-
-.valid-container {
-    width: 50%;
-}
-
-.flex input {
-    height: 50px;
-    border-radius: 8px;
-    border: 1px solid rgba(0, 0, 0, 0.8);
-}
-
-.half {
-    display: flex;
-    flex-direction: row;
-}
-
-.bitcoin {
-  background: linear-gradient(237.41deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 99.07%), #FFAE34;
-}
-
-.ninja {
-  background: linear-gradient(237.75deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%), #222222;
-}
-
-.blockchain {
-  background: linear-gradient(238.04deg, rgba(0, 0, 0, 0.15) 1.49%, rgba(0, 0, 0, 0) 100%), #8B58F9;
-}
-
-.evilcorp {
-  background: linear-gradient(237.75deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 100%), #F33355;
-}
-
-input::placeholder {
-  font-variant: small-caps;
-}
-
 </style>

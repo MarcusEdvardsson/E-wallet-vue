@@ -1,4 +1,4 @@
-# vue-ewallet
+# the-ewallet
 
 ## Project setup
 ```
