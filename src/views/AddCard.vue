@@ -5,7 +5,7 @@
     <CardForm @cardInfo="cardInfo" />
     <button
     class="button"
-    @click="addCard">ADD CARD</button>
+    @click="addCard">Add Card</button>
   </section>
 </template>
 
@@ -31,10 +31,10 @@ export default {
       if (localStorage.getItem('cards')) {
         this.myCards = JSON.parse(localStorage.getItem('cards'))
         this.myCards.push(this.input)
-        localStorage.setItem('cards', JSON.stringify(this.allCards))
+        localStorage.setItem('cards', JSON.stringify(this.myCards))
       } else {
         this.myCards.push(this.input)
-        localStorage.setItem('cards', JSON.stringify(this.allCards))
+        localStorage.setItem('cards', JSON.stringify(this.myCards))
       }
       this.$router.push('/')
     },

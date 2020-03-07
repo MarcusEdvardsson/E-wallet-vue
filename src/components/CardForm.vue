@@ -1,30 +1,31 @@
 <template>
   <form @input="cardInfo" class="cardform">
-    <div>
-        <label for="cardNumber">Card Number</label>
-        <input
-            type="text"
-            id="cardNumber"
-            placeholder="XXXX XXXX XXXX XXXX"
-            onfocus="this.placeholder = ''"
-            onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
-            v-model="input.nrInput"
-            maxlength="16"
-            @input="validateNumber"/>
+    <div class="flex">
+      <label for="cardNumber">Card Number</label>
+      <input
+          type="text"
+          id="cardNumber"
+          placeholder="XXXX XXXX XXXX XXXX"
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
+          v-model="input.nrInput"
+          maxlength="16"
+          @input="validateNumber"/>
     </div>
-    <label for="cardName">Cardholder Name</label>
-    <input
-      type="text"
-      id="cardName"
-      placeholder="Cardholder Name"
-      onfocus="this.placeholder = ''"
-      onblur="this.placeholder = 'Cardholder Name'"
-      v-model="input.nameInput"
-      maxlength="22"
-      @input="validateName"/>
-
-    <section class="sides">
-      <div>
+    <div class="flex">
+      <label for="cardName">Cardholder Name</label>
+        <input
+          type="text"
+          id="cardName"
+          placeholder="Cardholder Name"
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'Cardholder Name'"
+          v-model="input.nameInput"
+          maxlength="22"
+          @input="validateName"/>
+    </div>
+    <div class="half">
+      <div class="flex valid">
         <label for="validInput">Valid</label>
         <input
           type="text"
@@ -38,19 +39,19 @@
       </div>
 
       <div>
-        <label for="cvcInput">CvC</label>
+        <label for="ccvInput">CCV</label>
         <input
           type="text"
-          id="cvcInput"
+          id="ccvInput"
           placeholder="XXX"
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'XXX'"
-          v-model="input.cvcInput"
+          v-model="input.ccvInput"
           maxlength="3"
-          @input="validateCvc"/>
+          @input="validateCcv"/>
       </div>
 
-    </section>
+    </div>
         <label for="vendor">VENDOR</label>
         <select name id="vendor" v-model="input.vendorInput" @input="validateVendor">
             <option value="bitcoin">Bitcoin Inc</option>
@@ -69,7 +70,7 @@ export default {
         nrInput: '',
         nameInput: '',
         validInput: '',
-        cvcInput: '',
+        ccvInput: '',
         vendorInput: '',
         isValid: false
       },
@@ -77,7 +78,7 @@ export default {
         validNumber: false,
         validName: false,
         validValid: false,
-        validCvc: false,
+        validCcv: false,
         validVendor: true
       }
     }
@@ -119,11 +120,11 @@ export default {
         this.cardInput.validValid = true
       }
     },
-    validateCvc () {
-      if (this.checkCvc(this.input.cvcInput) === true) {
-        this.cardInput.validCvc = false
+    validateCcv () {
+      if (this.checkCcv(this.input.ccvInput) === true) {
+        this.cardInput.validCcv = false
       } else {
-        this.cardInput.validCvc = true
+        this.cardInput.validCcv = true
       }
     },
     validateVendor () {
@@ -141,9 +142,9 @@ export default {
       const pattern = /^(0[1-9]|1[012])\/\d{2}$/
       return pattern.test(validInput)
     },
-    checkCvc (cvcInput) {
+    checkCcv (ccvInput) {
       const pattern = /^[0-9]{3}/
-      return pattern.test(cvcInput)
+      return pattern.test(ccvInput)
     }
   }
 }
