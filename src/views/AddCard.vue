@@ -1,11 +1,14 @@
 <template>
   <section>
     <Top header="ADD A NEW BANK CARD" />
-    <Card :input="input" />
+    <transition name="slide-left-centered">
+      <Card :input="input" v-on="slide" />
+    </transition>
     <CardForm @cardInfo="cardInfo" />
     <button
     class="button"
-    @click="addCard">Add Card</button>
+    @click="addCard(); slide = !slide;">
+    Add Card</button>
   </section>
 </template>
 
@@ -23,7 +26,8 @@ export default {
   data: () => {
     return {
       input: {},
-      myCards: []
+      myCards: [],
+      slide: true
     }
   },
   methods: {
@@ -50,5 +54,20 @@ export default {
   position: absolute;
   bottom: 2rem;
   right: 46%;
-  }
+}
+
+.slide-left-centered-enter,
+.slide-left-centered-leave-to {
+    transform: translateX(-100%);
+    opacity: 0;
+}
+
+.slide-left-centered-enter-active {
+    transition: all .3s ease;
+}
+
+.slide-left-centered-leave-active {
+    transition: all .5s ease;
+}
+
 </style>

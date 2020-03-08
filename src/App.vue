@@ -1,8 +1,43 @@
 <template>
   <div id="app">
-    <router-view class="container" />
+    <transition
+      name="fade"
+      mode="out-in"
+      @beforeLeave="beforeLeave"
+      @enter="enter"
+      @afterEnter="afterEnter">
+        <router-view class="container" />
+    </transition>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'App',
+  data () {
+    return {
+      prevHeight: 0
+    }
+  },
+  methods: {
+    beforeLeave (element) {
+      this.prevHeight = getComputedStyle(element).height
+    },
+    enter (element) {
+      const { height } = getComputedStyle(element)
+
+      element.style.height = this.prevHeight
+
+      setTimeout(() => {
+        element.style.height = height
+      })
+    },
+    afterEnter (element) {
+      element.style.height = 'auto'
+    }
+  }
+}
+</script>
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=PT+Mono|Source+Sans+Pro&display=swap');
@@ -21,7 +56,7 @@
   height: 110vh;
   display: flex;
   justify-content: center;
-  background: white;
+  background-image: linear-gradient(315deg, #d7e1ec 0%, #ffffff 74%);
 }
 
 .container {
@@ -33,6 +68,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: linear-gradient(315deg, #d7e1ec 0%, #ffffff 74%);
 }
 
 .button {
@@ -47,7 +83,7 @@
   padding:16px 35px;
   text-decoration:none;
   text-shadow:0px 0px 50px #2f6627;
-  position: absolute;
+  position: fixed;
   bottom: 1rem;
   right: 51%;
 }
@@ -61,4 +97,17 @@
   bottom: 1rem;
   right: 40%;
 }
+
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 0.3s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+
 </style>

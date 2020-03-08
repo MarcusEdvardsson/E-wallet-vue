@@ -161,6 +161,8 @@ export default {
 }
 
 .flex input {
+  font-family: 'PT Mono';
+  font-size: 16px;
   width: 382px;
   height: 56px;
   border-radius: 8px;
@@ -169,10 +171,14 @@ export default {
   padding: 10px;
 }
 
+.flex input:focus {
+  outline: none;
+}
+
 .flex input::placeholder {
   color: black;
   font-family: 'PT Mono';
-  font-size: 1rem;
+  font-size: 16px;
   font-weight: bold;
 }
 
@@ -182,6 +188,12 @@ export default {
   border-radius: 8px;
   border: 1px solid rgba(0, 0, 0, 0.8);
   margin: 5px 0px;
+}
+
+.flex option {
+  font-family: 'PT Mono';
+  font-size: 16px;
+  text-align: center;
 }
 
 .half input {
