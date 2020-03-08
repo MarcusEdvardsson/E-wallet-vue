@@ -24,5 +24,18 @@ export default {
 </script>
 
 <style scoped>
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.stacked {
+  border: 1px solid pink;
+}
+
+.stacked:nth-child(n){
+  border: 5px solid black;
+  transform: translateY(-2rem);
+}
 </style>

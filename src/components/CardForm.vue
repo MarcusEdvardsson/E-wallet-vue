@@ -51,7 +51,7 @@
         <select name
         id="vendor"
         v-model="input.vendor"
-        @input="validateVendor">
+        @input="addVendor">
             <option value="bitcoin">Bitcoin Inc</option>
             <option value="ninja">Ninja Bank</option>
             <option value="blockchain">Block Chain Inc</option>
@@ -101,7 +101,7 @@ export default {
       }
     },
     addDate () {
-      if (this.checkValid(this.input.date) === true) {
+      if (this.checkDate(this.input.date) === true) {
         this.cardInput.thisDate = false
       } else {
         this.cardInput.thisDate = true
@@ -113,6 +113,9 @@ export default {
       } else {
         this.cardInput.thisCcv = true
       }
+    },
+    addVendor () {
+      this.cardInput.thisVendor = false
     },
     cardInfo () {
       const isTrue = Object.keys(this.cardInput).every(
@@ -126,9 +129,6 @@ export default {
       }
       this.$emit('cardInfo', this.input)
     },
-    validateVendor () {
-      this.cardInput.thisVendor = false
-    },
     checkNumber (number) {
       const pattern = /^[0-9]{16}/
       return pattern.test(number)
@@ -137,7 +137,7 @@ export default {
       const pattern = /^[a-zA-Z]+ [a-zA-Z]+$/
       return pattern.test(name)
     },
-    checkValid (date) {
+    checkDate (date) {
       const pattern = /^(0[1-9]|1[012])\/\d{2}$/
       return pattern.test(date)
     },
