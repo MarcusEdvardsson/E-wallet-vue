@@ -37,12 +37,28 @@
 
 .button {
   font-family: 'PT Mono';
-  width: 24rem;
-  height: 5rem;
-  border: 1px solid #000000;
-  background: white;
-  border-radius: 0.5rem;
-  font-size: 1.4rem;
-  cursor: pointer;
+  box-shadow: 0px 0px 9px -1px #77DF79;
+  background-color:#44D362;
+  border-radius:42px;
+  border:1px solid #98E690;
+  cursor:pointer;
+  color:#ffffff;
+  font-size:17px;
+  padding:16px 35px;
+  text-decoration:none;
+  text-shadow:0px 0px 50px #2f6627;
+  position: absolute;
+  bottom: 1rem;
+  right: 51%;
+}
+
+.remove {
+  background-color:#fb452b;
+  box-shadow: 0px 0px 9px -1px #ff5e46;
+  border:1px solid #ff886a;
+  text-shadow:0px 0px 50px #fb452b;
+  padding:16px 30px;
+  bottom: 1rem;
+  right: 40%;
 }
 </style>

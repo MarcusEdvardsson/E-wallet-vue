@@ -44,3 +44,11 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.button {
+  position: absolute;
+  bottom: 2rem;
+  right: 46%;
+  }
+</style>
