@@ -7,7 +7,7 @@
       <p class="numbers">{{number}}</p>
       <section class="footer">
         <div class="name">
-          <p class="cardInfo">Cardholder</p>
+          <p class="cardInfo">Cardholder Name</p>
           <p class="option">{{name}}</p>
         </div>
         <div class="valid">
@@ -46,7 +46,7 @@ export default {
     },
     date () {
       if (!this.input.date) {
-        const set = 'XX/XX'
+        const set = 'MM/YY'
         return set
       } else {
         return this.input.date
@@ -71,7 +71,6 @@ export default {
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
-  font-family: "PT Mono";
   background: #d0d0d0;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
 }

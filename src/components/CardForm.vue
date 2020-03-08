@@ -5,9 +5,6 @@
       <input
           type="text"
           id="cardNumber"
-          placeholder="XXXX XXXX XXXX XXXX"
-          onfocus="this.placeholder = ''"
-          onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
           v-model="input.number"
           maxlength="16"
           @input="addNumber"/>
@@ -17,41 +14,39 @@
         <input
           type="text"
           id="cardName"
-          placeholder="Cardholder Name"
+          placeholder="FIRSTNAME LASTNAME"
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'Cardholder Name'"
           v-model="input.name"
-          maxlength="22"
+          maxlength="30"
           @input="addName"/>
     </div>
+
     <div class="half">
       <div class="flex valid">
-        <label for="date">Valid</label>
+        <label for="date">Valid thru</label>
         <input
           type="text"
           id="date"
-          placeholder="XX/XX"
+          placeholder="MM/YY"
           onfocus="this.placeholder = ''"
-          onblur="this.placeholder = 'XX/XX'"
+          onblur="this.placeholder = 'MM/YY'"
           v-model="input.date"
           maxlength="5"
           @input="addDate"/>
       </div>
 
-      <div>
+      <div class="flex ccv">
         <label for="ccv">CCV</label>
         <input
           type="text"
           id="ccv"
-          placeholder="XXX"
-          onfocus="this.placeholder = ''"
-          onblur="this.placeholder = 'XXX'"
           v-model="input.ccv"
           maxlength="3"
           @input="addCcv"/>
       </div>
-
     </div>
+    <div class="flex">
         <label for="vendor">VENDOR</label>
         <select name
         id="vendor"
@@ -62,6 +57,7 @@
             <option value="blockchain">Block Chain Inc</option>
             <option value="evil">Evil Corp</option>
         </select>
+    </div>
   </form>
 </template>
 
@@ -154,4 +150,46 @@ export default {
 </script>
 
 <style scoped>
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex label {
+  align-self: flex-start;
+  font-size: 0.7rem;
+}
+
+.flex input {
+  width: 382px;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  margin: 5px 0px;
+  padding: 10px;
+}
+
+.flex input::placeholder {
+  color: black;
+  font-family: 'PT Mono';
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.flex select {
+  width: 382px;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  margin: 5px 0px;
+}
+
+.half input {
+  width: 180px;
+}
+
+.half {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
