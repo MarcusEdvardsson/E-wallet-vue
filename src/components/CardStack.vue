@@ -24,13 +24,5 @@ export default {
 </script>
 
 <style scoped>
-.cards {
-  margin-top: 2rem;
-}
-.stacked {
-  height: 4rem;
-  overflow: visible;
-  margin-top: -3rem;
-  position: relative;
-}
+
 </style>

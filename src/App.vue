@@ -36,17 +36,13 @@
 }
 
 .button {
+  font-family: 'PT Mono';
   width: 24rem;
   height: 5rem;
   border: 1px solid #000000;
   background: white;
   border-radius: 0.5rem;
   font-size: 1.4rem;
-  font-weight: 900;
-  position: absolute;
-  bottom: 3rem;
-}
-.remove {
-  bottom: 8.5rem;
+  cursor: pointer;
 }
 </style>

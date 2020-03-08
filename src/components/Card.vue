@@ -71,23 +71,23 @@ export default {
   border-radius: 0.5rem;
   padding: 1rem;
   margin: 1rem;
-  background: #d0d0d0;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.25);
+  background: linear-gradient(237.75deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0) 100%), #D0D0D0;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.2);
 }
 .bitcoin {
-  background: #ffae34;
+  background: linear-gradient(237.41deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 99.07%), #FFAE34;
   color: black;
 }
 .evil {
-  background: #f33355;
+  background: linear-gradient(237.75deg, rgba(0, 0, 0, 0.16) 0%, rgba(0, 0, 0, 0) 100%), #F33355;
   color: white;
 }
 .blockchain {
-  background: #8b58f9;
+  background: linear-gradient(238.04deg, rgba(0, 0, 0, 0.15) 1.49%, rgba(0, 0, 0, 0) 100%), #8B58F9;
   color: white;
 }
 .ninja {
-  background: #222222;
+  background: linear-gradient(237.75deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 100%), #222222;
   color: white;
 }
 .icons {
@@ -104,6 +104,7 @@ export default {
   font-size: 1.8rem;
   margin: 1rem 0;
   line-height: 2rem;
+  letter-spacing: 0.03em;
 }
 .footer {
   display: flex;
@@ -116,19 +117,9 @@ export default {
 }
 .valid {
   text-align: right;
-  width: 5rem;
 }
 .cardInfo {
   font-size: 0.75rem;
 }
-.option {
-  font-size: 1.125rem;
-  width: 15rem;
-}
-.optionValid {
-  font-size: 1.125rem;
-  background: none;
-  border: none;
-  outline: none;
-}
+
 </style>

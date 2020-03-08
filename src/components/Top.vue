@@ -1,6 +1,6 @@
 <template>
   <section class="top">
-    <h1>{{ header }}</h1>
+    <h1 class="header">{{ header }}</h1>
   </section>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   height: 7.75rem;
   font-family: "Source Sans Pro";
 }
-.top h1 {
+.header {
   font-size: 2rem;
   height: 7rem;
   margin-top: 3.5rem;
