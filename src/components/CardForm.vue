@@ -87,18 +87,6 @@ export default {
     }
   },
   methods: {
-    cardInfo () {
-      const isTrue = Object.keys(this.cardInput).every(
-        key => this.cardInput[key] === false
-      )
-      if (isTrue === true) {
-        const isEmpty = Object.keys(this.input).some(key => this.input[key] === '')
-        if (isEmpty === false) {
-          this.input.valid = true
-        }
-      }
-      this.$emit('cardInfo', this.input)
-    },
     addNumber () {
       if (
         this.checkNumber(this.input.number) === true ||
@@ -129,6 +117,18 @@ export default {
       } else {
         this.cardInput.thisCcv = true
       }
+    },
+    cardInfo () {
+      const isTrue = Object.keys(this.cardInput).every(
+        key => this.cardInput[key] === false
+      )
+      if (isTrue === true) {
+        const isEmpty = Object.keys(this.input).some(key => this.input[key] === '')
+        if (isEmpty === false) {
+          this.input.valid = true
+        }
+      }
+      this.$emit('cardInfo', this.input)
     },
     validateVendor () {
       this.cardInput.thisVendor = false

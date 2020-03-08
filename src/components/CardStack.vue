@@ -9,8 +9,12 @@
 import Card from './Card'
 export default {
   name: 'CardStack',
-  props: { cards: Array },
-  components: { Card },
+  props: {
+    cards: Array
+  },
+  components: {
+    Card
+  },
   methods: {
     changeCard (index) {
       this.$emit('changeCard', index)
