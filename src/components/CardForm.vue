@@ -8,9 +8,9 @@
           placeholder="XXXX XXXX XXXX XXXX"
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'XXXX XXXX XXXX XXXX'"
-          v-model="input.nrInput"
+          v-model="input.number"
           maxlength="16"
-          @input="validateNumber"/>
+          @input="addNumber"/>
     </div>
     <div class="flex">
       <label for="cardName">Cardholder Name</label>
@@ -20,40 +20,43 @@
           placeholder="Cardholder Name"
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'Cardholder Name'"
-          v-model="input.nameInput"
+          v-model="input.name"
           maxlength="22"
-          @input="validateName"/>
+          @input="addName"/>
     </div>
     <div class="half">
       <div class="flex valid">
-        <label for="validInput">Valid</label>
+        <label for="date">Valid</label>
         <input
           type="text"
-          id="validInput"
+          id="date"
           placeholder="XX/XX"
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'XX/XX'"
-          v-model="input.validInput"
+          v-model="input.date"
           maxlength="5"
-          @input="validateValid"/>
+          @input="addDate"/>
       </div>
 
       <div>
-        <label for="ccvInput">CCV</label>
+        <label for="ccv">CCV</label>
         <input
           type="text"
-          id="ccvInput"
+          id="ccv"
           placeholder="XXX"
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'XXX'"
-          v-model="input.ccvInput"
+          v-model="input.ccv"
           maxlength="3"
-          @input="validateCcv"/>
+          @input="addCcv"/>
       </div>
 
     </div>
         <label for="vendor">VENDOR</label>
-        <select name id="vendor" v-model="input.vendorInput" @input="validateVendor">
+        <select name
+        id="vendor"
+        v-model="input.vendor"
+        @input="validateVendor">
             <option value="bitcoin">Bitcoin Inc</option>
             <option value="ninja">Ninja Bank</option>
             <option value="blockchain">Block Chain Inc</option>
@@ -67,19 +70,19 @@ export default {
   data: () => {
     return {
       input: {
-        nrInput: '',
-        nameInput: '',
-        validInput: '',
-        ccvInput: '',
-        vendorInput: '',
-        isValid: false
+        number: '',
+        name: '',
+        date: '',
+        ccv: '',
+        vendor: '',
+        valid: false
       },
       cardInput: {
-        validNumber: false,
-        validName: false,
-        validValid: false,
-        validCcv: false,
-        validVendor: true
+        thisNumber: false,
+        thisName: false,
+        thisDate: false,
+        thisCcv: false,
+        thisVendor: true
       }
     }
   },
@@ -91,60 +94,60 @@ export default {
       if (isTrue === true) {
         const isEmpty = Object.keys(this.input).some(key => this.input[key] === '')
         if (isEmpty === false) {
-          this.input.isValid = true
+          this.input.valid = true
         }
       }
       this.$emit('cardInfo', this.input)
     },
-    validateNumber () {
+    addNumber () {
       if (
-        this.checkNumber(this.input.nrInput) === true ||
-        this.input.nrInput === ''
+        this.checkNumber(this.input.number) === true ||
+        this.input.number === ''
       ) {
-        this.cardInput.validNumber = false
+        this.cardInput.thisNumber = false
       } else {
-        this.cardInput.validNumber = true
+        this.cardInput.thisNumber = true
       }
     },
-    validateName () {
-      if (this.checkName(this.input.nameInput) === true) {
-        this.cardInput.validName = false
+    addName () {
+      if (this.checkName(this.input.name) === true) {
+        this.cardInput.thisName = false
       } else {
-        this.cardInput.validName = true
+        this.cardInput.thisName = true
       }
     },
-    validateValid () {
-      if (this.checkValid(this.input.validInput) === true) {
-        this.cardInput.validValid = false
+    addDate () {
+      if (this.checkValid(this.input.date) === true) {
+        this.cardInput.thisDate = false
       } else {
-        this.cardInput.validValid = true
+        this.cardInput.thisDate = true
       }
     },
-    validateCcv () {
-      if (this.checkCcv(this.input.ccvInput) === true) {
-        this.cardInput.validCcv = false
+    addCcv () {
+      if (this.checkCcv(this.input.ccv) === true) {
+        this.cardInput.thisCcv = false
       } else {
-        this.cardInput.validCcv = true
+        this.cardInput.thisCcv = true
       }
     },
     validateVendor () {
-      this.cardInput.validVendor = false
+      this.cardInput.thisVendor = false
     },
-    checkNumber (nrInput) {
+    checkNumber (number) {
       const pattern = /^[0-9]{16}/
-      return pattern.test(nrInput)
+      return pattern.test(number)
     },
-    checkName (nameInput) {
+    checkName (name) {
       const pattern = /^[a-zA-Z]+ [a-zA-Z]+$/
-      return pattern.test(nameInput)
+      return pattern.test(name)
     },
-    checkValid (validInput) {
+    checkValid (date) {
       const pattern = /^(0[1-9]|1[012])\/\d{2}$/
-      return pattern.test(validInput)
+      return pattern.test(date)
     },
-    checkCcv (ccvInput) {
+    checkCcv (ccv) {
       const pattern = /^[0-9]{3}/
-      return pattern.test(ccvInput)
+      return pattern.test(ccv)
     }
   }
 }

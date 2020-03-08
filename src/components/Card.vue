@@ -4,15 +4,15 @@
       <div class="icons">
         <img :src="require(`../assets/chip-dark.svg`)" alt />
       </div>
-      <p class="numbers">{{nrInput}}</p>
+      <p class="numbers">{{number}}</p>
       <section class="footer">
         <div class="name">
           <p class="cardInfo">Cardholder</p>
-          <p class="option">{{nameInput}}</p>
+          <p class="option">{{name}}</p>
         </div>
         <div class="valid">
           <p class="cardInfo">Valid thru</p>
-          <p class="optionValid">{{validInput}}</p>
+          <p class="optionValid">{{date}}</p>
         </div>
       </section>
     </article>
@@ -26,37 +26,37 @@ export default {
     input: Object
   },
   computed: {
-    nrInput () {
-      if (!this.input.nrInput) {
-        const unSet = 'XXXX XXXX XXXX XXXX'
-        return unSet
+    number () {
+      if (!this.input.number) {
+        const set = 'XXXX XXXX XXXX XXXX'
+        return set
       } else {
-        let nrInput = this.input.nrInput
-        nrInput = nrInput.match(/.{1,4}/g)
-        return nrInput.join(' ')
+        let number = this.input.number
+        number = number.match(/.{1,4}/g)
+        return number.join(' ')
       }
     },
-    nameInput () {
-      if (!this.input.nameInput) {
-        const unSet = 'Firstname Lastname'
-        return unSet
+    name () {
+      if (!this.input.name) {
+        const set = 'Firstname Lastname'
+        return set
       } else {
-        return this.input.nameInput
+        return this.input.name
       }
     },
-    validInput () {
-      if (!this.input.validInput) {
-        const unSet = 'XX/XX'
-        return unSet
+    date () {
+      if (!this.input.date) {
+        const set = 'XX/XX'
+        return set
       } else {
-        return this.input.validInput
+        return this.input.date
       }
     },
     vendor () {
-      if (!this.input.vendorInput) {
+      if (!this.input.vendor) {
         return this.defaultImg
       } else {
-        const vendor = this.input.vendorInput
+        const vendor = this.input.vendor
         return vendor
       }
     }
