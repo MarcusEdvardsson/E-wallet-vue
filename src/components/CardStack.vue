@@ -31,11 +31,16 @@ export default {
 }
 
 .stacked {
-  border: 1px solid pink;
+  transform: translateY(-2rem);
 }
 
-.stacked:nth-child(n){
-  border: 5px solid black;
-  transform: translateY(-2rem);
+.stacked:first-child {
+  position: relative;
+}
+
+.stacked:nth-child(n+2) {
+  transform: translateY(-15rem);
+  overflow: visible;
+  margin-bottom: -13rem;
 }
 </style>
